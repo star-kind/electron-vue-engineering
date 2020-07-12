@@ -1,7 +1,7 @@
 <template>
     <el-container>
-        <el-header class="m_div_">
-            <router-link to="landing-page">
+        <el-header class="header_div_">
+            <router-link to="landing-page" class="back_home">
                 主页
             </router-link>
         </el-header>
@@ -43,8 +43,15 @@ export default {
 }
 </script>
 <style type="text/css" scoped="TestCase.vue">
-.m_div_ {
+.back_home {
+    color: #ffffff;
+    text-decoration-line: none;
+}
+
+.header_div_ {
     text-align: center;
-    font-size: 23px;
+    height: 60px;
+    padding: 20px 0 0 0;
+    background-color: #4f94ea;
 }
 </style>

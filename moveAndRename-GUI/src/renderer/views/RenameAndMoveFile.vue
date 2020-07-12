@@ -1,7 +1,7 @@
 <template>
     <el-container>
-        <el-header class="m_div_">
-            <router-link to="landing-page">
+        <el-header class="header_div_">
+            <router-link to="landing-page" class="back_home">
                 主页
             </router-link>
         </el-header>
@@ -117,7 +117,7 @@ export default {
 
             this.$notify({
                 title: '成功',
-                message: '文件业已批量重命名及迁移至新目录',
+                message: '已成功将' + this.arries.countingMoving + '个文件重命名及迁移至新目录',
                 type: 'success'
             });
         },
@@ -157,7 +157,7 @@ export default {
         movingFiles() {
             //批量迁移文件
             for (let i in this.arries.theNewNamesArr) {
-                move2Dest(this.arries.theNewNamesArr[i], this.formData.destination,this.arries.filesNameArr[i]);
+                move2Dest(this.arries.theNewNamesArr[i], this.formData.destination, this.arries.filesNameArr[i]);
                 this.countingMoving++;
             }
         }
@@ -172,9 +172,16 @@ export default {
 }
 </script>
 <style type="text/css" scoped="TestCase.vue">
-.m_div_ {
+.back_home {
+    color: #ffffff;
+    text-decoration-line: none;
+}
+
+.header_div_ {
     text-align: center;
-    font-size: 23px;
+    height: 60px;
+    padding: 20px 0 0 0;
+    background-color: #4f94ea;
 }
 
 .btn_div_ {

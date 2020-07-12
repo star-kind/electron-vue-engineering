@@ -9,7 +9,7 @@ var path = require('path');
  * @param      {string}  destPath     The destination path
  * @param      {<type>}  fileName     The file name
  */
-exports.moveToDest = (srcFilePath, destPath, fileName) => {
+const moveToDest = (srcFilePath, destPath, fileName) => {
     this.checkDirExist(destPath);
     this.createDirIfNotExist(destPath);
 
@@ -39,7 +39,7 @@ exports.moveToDest = (srcFilePath, destPath, fileName) => {
  * @param      {<type>}   dirUrl  The dir url
  * @return     {Promise}  { description_of_the_return_value }
  */
-exports.dirExist = (dirUrl) => {
+const dirExist = (dirUrl) => {
     return new Promise((resolve) => {
         //constants:常量,常数
         fs.access(dirUrl, fs.constants.F_OK, (err) => {
@@ -57,7 +57,7 @@ exports.dirExist = (dirUrl) => {
  *
  * @param      {<type>}  dirUrl  The dir url
  */
-exports.checkDirExist = (dirUrl) => {
+const checkDirExist = (dirUrl) => {
     const fn = (dirUrl) => {
         this.dirExist(dirUrl).then((exist) => {
             if (exist) {
@@ -75,7 +75,7 @@ exports.checkDirExist = (dirUrl) => {
  *
  * @param      {<type>}  dirUrl  The dir url
  */
-exports.createDirIfNotExist = (dirUrl) => {
+const createDirIfNotExist = (dirUrl) => {
     this.dirExist(dirUrl).then((exist) => {
         if (!exist) {
             fs.mkdirSync(dirUrl, { recursive: true })
@@ -86,4 +86,11 @@ exports.createDirIfNotExist = (dirUrl) => {
         console.error('\nerror==>>' + error + '\n')
         throw error;
     })
+}
+
+export {
+    moveToDest,
+    createDirIfNotExist,
+    checkDirExist,
+    dirExist
 }

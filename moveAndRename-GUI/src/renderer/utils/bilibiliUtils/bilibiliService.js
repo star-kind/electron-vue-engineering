@@ -16,20 +16,21 @@ var renameFileNew = require('./renameFileNew')
 var moveToOther = require('./moveFileToOtherDir')
 
 /**
- * { 业务接口 }
+ * { function_description }
  *
- * @param      {<type>}    req     The request
- * @param      {<type>}    res     The resource
- * @param      {Function}  next    The next
+ * @param      {<type>}  urlList  The url list
+ * @return     {result}  { description_of_the_return_value }
  */
-const blvService = function(req, res, next) {
-    console.info(req.body)
+const blvService = function(urlList) {
+    console.dir(urlList)
+    var cacheUrl = urlList.srcPath;
+    var targetUrl = urlList.targetPath;
 
     var newNamePathArr = [];
     var contentsArr = [];
-    var cacheUrl = req.body.srcPath
-    var targetUrl = req.body.targetPath
-    var flag = true
+    var amount = 0;
+
+    var flag = true;
 
     try {
         var jsonUrlArr = jsonUrlResults.getJsonFiles(cacheUrl);
@@ -38,7 +39,6 @@ const blvService = function(req, res, next) {
         let e = new exception(404, '源目录不存在')
         console.error('\nerror= ' + error + '\n')
         console.dir(e)
-        res.json(e)
         throw e;
     }
 
@@ -65,7 +65,6 @@ const blvService = function(req, res, next) {
         console.error('\nerror==> ' + error + '\n')
         let except01 = new exception(510, '请您删除源目录,接着解压备份的压缩文件,再输入地址,运行重试')
         console.dir(except01);
-        res.json(except01)
         throw except01;
     }
     console.info('\nnewNamePathArr: ' + newNamePathArr + '\n');
@@ -73,18 +72,19 @@ const blvService = function(req, res, next) {
     try { // TODO 此处无法捕获并抛出异常
         for (let k in newNamePathArr, newNamesArr) {
             moveToOther.moveToDest(newNamePathArr[k], targetUrl, newNamesArr[k])
+            amount = k;
         }
     } catch (error) {
         flag = false;
         let except = new exception(505, '目的地目录并不存在,请创建好目的地目录后,再试一次')
         console.dir(except);
         console.error('\nerror== ' + error + '\n')
-        res.json(except);
         throw except;
     }
 
     if (flag) {
-        res.json({ "status": 200, "msg": "", "data": "" })
+        var res = new result(200, '成功提取及移动bilibili视频文件至指定目录', amount);
+        return res;
     }
 }
 
@@ -97,6 +97,19 @@ const blvService = function(req, res, next) {
 const exception = function(status, msg) {
     this.status = status;
     this.msg = msg;
+}
+
+/**
+ * 消息返回实体
+ *
+ * @param      {<type>}  status  The status
+ * @param      {<type>}  msg     The message
+ * @param      {<type>}  data    The data
+ */
+const result = function(status, msg, data) {
+    this.status = status;
+    this.msg = msg;
+    this.data = data;
 }
 
 module.exports.blvService = blvService;

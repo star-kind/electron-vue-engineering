@@ -12,7 +12,7 @@ exports.renameBlvVideo = (oldVideoPath, newVideoName) => {
     try {
         var index = oldVideoPath.lastIndexOf('/');
         var url = oldVideoPath.substring(0, index + 1);
-    } catch {
+    } catch (error) {
         console.error('\n若此处报错,只能删除原文件夹,再解压备份的压缩文件,运行重试\n');
     }
 

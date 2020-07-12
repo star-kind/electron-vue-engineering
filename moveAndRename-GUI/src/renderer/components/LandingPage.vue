@@ -24,7 +24,7 @@
                 <!--  -->
                 <div class="doc">
                     <div class="title alt">Other Documentation</div>
-                    <button class="alt" @click="jump2('')">未定</button>
+                    <button class="alt" @click="jump2('biliMedia')">哔哩哔哩缓存视频文件批量更名及移动</button>
                     <!--  -->
                     <button class="alt" @click="jump2('')">未定</button>
                 </div>

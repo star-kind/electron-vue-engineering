@@ -32,5 +32,11 @@ export default new Router({
             component: resolve => require(['@/views/RenameAndMoveFile.vue'], resolve),
             alias: 'renameAndMoveFile'
         },
+        {
+            path: '/biliMedia',
+            name: 'biliMedia',
+            component: resolve => require(['@/views/biliMedia.vue'], resolve),
+            alias: 'bilibiliMedia'
+        },
     ]
 })
