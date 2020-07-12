@@ -47,7 +47,8 @@ export default {
             rules: {
                 srcPath: [{ required: true, message: "请输入视频缓存所处目录路径", trigger: "blur" }],
                 targetPath: [{ required: true, message: "请输入目的地目录路径", trigger: "blur" }],
-            }
+            },
+            resp: Object,
         }
     },
     methods: {
@@ -70,8 +71,22 @@ export default {
             }
             console.log(pathData);
 
-            var resp = blvService(pathData);
-            console.dir(resp);
+            try {
+                this.resp = blvService(pathData);
+            } catch (error) {
+                console.error(error);
+                this.$notify.error({
+                    title: '错误',
+                    message: error.msg
+                });
+                return;
+            }
+
+            this.$notify({
+                title: '操作成功',
+                message: '已成功将 ' + this.resp.data + ' 个文件进行改名及移动至目的地目录',
+                type: 'success'
+            });
         },
         /* reset */
         resetForm(refItemName) {
@@ -79,13 +94,9 @@ export default {
         }
     },
     mounted() {
-        // console.info(this)
+        console.info(this)
         console.info('...挂载完成...')
     },
-    destoryed() {
-        console.log("销毁完成......");
-        console.dir(this)
-    }
 }
 </script>
 <style type="text/css" scoped="biliMedia.vue">

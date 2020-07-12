@@ -10,8 +10,8 @@ var path = require('path');
  * @param      {<type>}  fileName     The file name
  */
 const moveToDest = (srcFilePath, destPath, fileName) => {
-    this.checkDirExist(destPath);
-    this.createDirIfNotExist(destPath);
+    checkDirExist(destPath);
+    createDirIfNotExist(destPath);
 
     var srcFileUrl = path.join(srcFilePath);
     var destFileUrl = path.join(destPath, fileName);
@@ -59,7 +59,7 @@ const dirExist = (dirUrl) => {
  */
 const checkDirExist = (dirUrl) => {
     const fn = (dirUrl) => {
-        this.dirExist(dirUrl).then((exist) => {
+        dirExist(dirUrl).then((exist) => {
             if (exist) {
                 console.log(`${dirUrl} 目录存在`)
             } else {
@@ -76,7 +76,7 @@ const checkDirExist = (dirUrl) => {
  * @param      {<type>}  dirUrl  The dir url
  */
 const createDirIfNotExist = (dirUrl) => {
-    this.dirExist(dirUrl).then((exist) => {
+    dirExist(dirUrl).then((exist) => {
         if (!exist) {
             fs.mkdirSync(dirUrl, { recursive: true })
         }

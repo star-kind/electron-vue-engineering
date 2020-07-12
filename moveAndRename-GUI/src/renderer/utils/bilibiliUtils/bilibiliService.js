@@ -28,8 +28,6 @@ const blvService = function(urlList) {
 
     var newNamePathArr = [];
     var contentsArr = [];
-    var amount = 0;
-
     var flag = true;
 
     try {
@@ -51,39 +49,48 @@ const blvService = function(urlList) {
     console.dir(jsonObject)
 
     var newNamesArr = getVideoNewName.getBiliVideoNewName(jsonObject);
+    console.info('\n newNamesArr:');
+    console.dir(newNamesArr);
 
     var blvUrls = getBlvFileUrls.getBlvUrl(cacheUrl);
-    console.info('\nblvUrls: ' + blvUrls);
+    console.info('\nblvUrls:');
+    console.dir(blvUrls);
 
     try {
-        for (let n in blvUrls, newNamesArr) {
-            console.info('\nblvUrls[n]:' + blvUrls[n])
-            console.info('\nnewNamesArr[n]:' + newNamesArr[n])
-            newNamePathArr.push(renameFileNew.renameBlvVideo(blvUrls[n], newNamesArr[n]));
+        if (blvUrls.length == newNamesArr.length) {
+            for (let n in blvUrls, newNamesArr) {
+                console.info('\nblvUrls[n]:' + blvUrls[n])
+                console.info('\nnewNamesArr[n]:' + newNamesArr[n])
+                newNamePathArr.push(renameFileNew.renameBlvVideo(blvUrls[n], newNamesArr[n]));
+            }
+        } else {
+            let errInfo = '缓存视频出现异常,应该是下载时出错,有的视频未能正常下载成功,导致路径数组与新文件名数组长度有异,请重新检查下载的文件';
+            let problem1 = new exception(511, errInfo);
+            console.dir(problem1);
+            throw problem1;
         }
     } catch (error) {
-        console.error('\nerror==> ' + error + '\n')
-        let except01 = new exception(510, '请您删除源目录,接着解压备份的压缩文件,再输入地址,运行重试')
-        console.dir(except01);
-        throw except01;
+        console.error(error + '\n')
+        let problem = new exception(510, '请删除源目录,接着解压备份的压缩文件,并检查缓存的视频文件是否完好,再运行重试')
+        console.dir(problem);
+        throw problem;
     }
     console.info('\nnewNamePathArr: ' + newNamePathArr + '\n');
 
     try { // TODO 此处无法捕获并抛出异常
         for (let k in newNamePathArr, newNamesArr) {
             moveToOther.moveToDest(newNamePathArr[k], targetUrl, newNamesArr[k])
-            amount = k;
         }
     } catch (error) {
         flag = false;
         let except = new exception(505, '目的地目录并不存在,请创建好目的地目录后,再试一次')
         console.dir(except);
-        console.error('\nerror== ' + error + '\n')
+        console.error('\n' + error + '\n')
         throw except;
     }
 
     if (flag) {
-        var res = new result(200, '成功提取及移动bilibili视频文件至指定目录', amount);
+        var res = new result(200, '成功提取及移动bilibili视频文件至指定目录', newNamePathArr.length);
         return res;
     }
 }

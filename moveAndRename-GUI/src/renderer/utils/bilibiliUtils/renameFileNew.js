@@ -1,4 +1,5 @@
 var fs = require('fs')
+var path = require('path')
 
 /**
  * { function_description }
@@ -8,15 +9,22 @@ var fs = require('fs')
  * @return     {string}  { description_of_the_return_value }
  */
 exports.renameBlvVideo = (oldVideoPath, newVideoName) => {
+    console.log('oldVideoPath= ' + oldVideoPath)
+    console.log('newVideoName= ' + newVideoName)
+
+    var index = "";
+    var url = "";
     //根据旧文件名文件路径截取视频所在目录路径
     try {
-        var index = oldVideoPath.lastIndexOf('/');
-        var url = oldVideoPath.substring(0, index + 1);
+        index = oldVideoPath.lastIndexOf('/');
+        url = oldVideoPath.substring(0, index + 1);
     } catch (error) {
         console.error('\n若此处报错,只能删除原文件夹,再解压备份的压缩文件,运行重试\n');
     }
+    console.info('url:' + url);
+    console.info('newVideoName:' + newVideoName);
 
-    var newNamePath = url + newVideoName;
+    var newNamePath = path.join(url, newVideoName);
     console.info('newNamePath:' + newNamePath);
 
     fs.rename(oldVideoPath, newNamePath, function(err) {
