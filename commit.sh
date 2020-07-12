@@ -8,7 +8,7 @@ git status
 
 git add .  
 
-git commit -m "The first Submission"
+git commit -m "The First Submission"
 
 # 提示：更新被拒绝，因为您当前分支的最新提交落后于其对应的远程分支。
 # 提示：再次推送前，先与远程变更合并（如 'git pull ...'）。详见
