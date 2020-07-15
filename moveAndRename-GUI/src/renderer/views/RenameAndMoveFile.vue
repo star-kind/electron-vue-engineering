@@ -36,11 +36,11 @@
 <script type="text/javascript">
 const ipcRenderer = require("electron").ipcRenderer;
 
-import { getUrlOfDest } from '@/utils/getDirectoriesName';
-import { getTheFileArray } from '@/utils/getFilesName';
-import { changedTheFileName } from '@/utils/changeFileName';
-import { getTheNewFileName } from '@/utils/changeFileName';
-import { move2Dest } from '@/utils/move2Dir';
+import { getUrlOfDest } from '@/utils/renameAndMove/getDirectoriesName';
+import { getTheFileArray } from '@/utils/renameAndMove/getFilesName';
+import { changedTheFileName } from '@/utils/renameAndMove/changeFileName';
+import { getTheNewFileName } from '@/utils/renameAndMove/changeFileName';
+import { move2Dest } from '@/utils/renameAndMove/move2Dir';
 
 var fs = require('fs')
 var join = require('path').join;
