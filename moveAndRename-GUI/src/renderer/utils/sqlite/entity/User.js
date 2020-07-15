@@ -4,8 +4,8 @@ class User {
         this.username = props.username;
         this.phone = props.phone;
         this.email = props.email;
-        this.password = props.password || '123456'; //默认值123456
-        this.salt = props.salt;
+        this.password = props.password;
+        this.salt = props.salt || '9874563210POIUYTREWQzxcvbnm'; //默认值
     }
 
     toString() {

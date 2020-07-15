@@ -90,19 +90,15 @@ DB.SqliteDB.prototype.queryData = function(sql, callback) {
  * 逐条查询数据
  *
  * @param      {<type>}  sql     The sql
- * @return     {<type>}  { description_of_the_return_value }
  */
 DB.SqliteDB.prototype.each = (sql) => {
     console.log(sql);
-    var result = null;
     DB.db.each(sql, function(err, rows) {
         if (err) throw err
         else {
             console.dir('查询结果：', rows)
-            result = rows
         }
     })
-    return result;
 }
 
 DB.SqliteDB.prototype.executeSql = function(sql) {

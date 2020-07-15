@@ -43,9 +43,8 @@ databaseCon.prototype.toString = function() {
  * @return     {Promise}  { description_of_the_return_value }
  */
 databaseCon.prototype.findAll = function(sqlStatement) {
-    console.log(sqlStatement)
-
     var db1 = this.db;
+    console.log(sqlStatement)
 
     var queryAll = new Promise(function(resolve, reject) {
         db1.all(sqlStatement, function(err, row) {
@@ -65,6 +64,62 @@ databaseCon.prototype.findAll = function(sqlStatement) {
 
     return queryAll;
 }
+
+//增加1位
+databaseCon.prototype.insert = function(sql_statement) {
+    console.log(sql_statement);
+    var dbConnect = this.db;
+
+    dbConnect.serialize(function() {
+        var stmt = dbConnect.prepare(sql_statement);
+        stmt.run();
+        stmt.finalize();
+    });
+}
+
+/**
+ * Finds a by identifier.根据id查询1位
+ *
+ * @param      {<type>}   sql     The sql
+ * @return     {Promise}  { description_of_the_return_value }
+ */
+databaseCon.prototype.findById = function(sql) {
+    var dbObj = this.db;
+    console.log(sql);
+
+    return new Promise(function(resolve, reject) {
+        dbObj.all(sql, function(error, row) {
+            if (error) throw error;
+            resolve(row) //关键
+        })
+    }).then(val => {
+        console.log('成功完成:')
+        console.log(val)
+        return val;
+    }, val => {
+        console.log('失败:')
+    });
+};
+
+databaseCon.prototype.executeCommand = function(sql_statement) {
+    console.log(sql_statement);
+    this.db.run(sql_statement, function(err) {
+        if (null != err) {
+            console.error(err);
+            return;
+        } else {
+            console.info('\n执行完毕!\n');
+        }
+    });
+};
+
+/**
+ * Closes a connect.
+ */
+databaseCon.prototype.closeConnect = function() {
+    this.db.close();
+};
+
 
 /**
  * Queries all.只能查询却无法返回数据
@@ -90,13 +145,6 @@ databaseCon.prototype.queryAll = function(sql_statement, callback) {
         });
     });
 }
-
-/**
- * Closes a connect.
- */
-databaseCon.prototype.closeConnect = function() {
-    this.db.close();
-};
 
 module.exports = {
     databaseCon

@@ -8,7 +8,7 @@ git status
 
 git add .  
 
-git commit -m "优化了目录结构,主要是utils"
+git commit -m "user模块:增加+更改+查询之DAO已完成,其中查询使用了promise"
 
 # 提示：更新被拒绝，因为您当前分支的最新提交落后于其对应的远程分支。
 # 提示：再次推送前，先与远程变更合并（如 'git pull ...'）。详见

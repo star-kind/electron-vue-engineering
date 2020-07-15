@@ -52,7 +52,7 @@ const getAllUser = () => {
         console.log('接受resolved的结果:')
         console.dir(JSON.stringify(result));
     })
-    links.closeConnect()
+    links.closeConnect();
 }
 getAllUser();
 
