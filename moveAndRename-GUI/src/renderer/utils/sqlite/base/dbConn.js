@@ -65,7 +65,11 @@ databaseCon.prototype.findAll = function(sqlStatement) {
     return queryAll;
 }
 
-//增加1位
+/**
+ * { 增加1位:未使用占位符'?' }
+ *
+ * @param      {<type>}  sql_statement  The sql statement
+ */
 databaseCon.prototype.insert = function(sql_statement) {
     console.log(sql_statement);
     var dbConnect = this.db;
@@ -76,6 +80,50 @@ databaseCon.prototype.insert = function(sql_statement) {
         stmt.finalize();
     });
 }
+
+/**
+ * Finds a by field value.
+ *
+ * @param      {<type>}   sql     The sql
+ * @return     {Promise}  { description_of_the_return_value }
+ */
+databaseCon.prototype.findByFieldValue = function(sql) {
+    var dbConnect = this.db;
+    console.log(sql)
+
+    return new Promise(function(resolve, reject) {
+        dbConnect.all(sql, function(error, row) {
+            if (error) throw error;
+            resolve(row) //关键
+        })
+    }).then(val => {
+        console.log('fulfiled=完成态')
+        console.dir(val)
+        return val;
+    }, val => {
+        console.log('rejected=失败态')
+    })
+}
+
+/**
+ * { insert }
+ *
+ * @param      {<type>}  props   The properties
+ */
+databaseCon.prototype.insertPlus = function(props) {
+    console.log(props)
+
+    var valueArr = Object.values(props.value)
+    console.info(valueArr)
+
+    var mineDB = this.db;
+    this.db.serialize(function() {
+        var stmt = mineDB.prepare(props.sql);
+        stmt.run(valueArr);
+        stmt.finalize();
+    });
+
+};
 
 /**
  * Finds a by identifier.根据id查询1位
@@ -104,12 +152,12 @@ databaseCon.prototype.findById = function(sql) {
 databaseCon.prototype.executeCommand = function(sql_statement) {
     console.log(sql_statement);
     this.db.run(sql_statement, function(err) {
-        if (null != err) {
-            console.error(err);
-            return;
-        } else {
-            console.info('\n执行完毕!\n');
-        }
+        // if (null != err) {
+        //     console.error(err);
+        //     return err;
+        // }
+        if (err) throw err;
+        console.info('\n执行完毕!\n');
     });
 };
 

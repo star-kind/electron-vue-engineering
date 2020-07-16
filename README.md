@@ -17,13 +17,10 @@
 
 + vue
 + element-ui
-+ lodash
 + electron
 + electron-vue
-+ webpack
-+ node.js
-+ es6
 + sqlite3(嵌入式文件型数据库)
++ Promise
 
 #### 后端server架构
 
@@ -40,4 +37,4 @@
 + 批量将JPG图片文件按所在目录名增加前缀名,并移动至指定目录
 + 批量将哔哩哔哩缓存之blv视频文件,按所在目录中的json文件内容节点增加前缀名,并移动至指定目录
 
-=======
+
