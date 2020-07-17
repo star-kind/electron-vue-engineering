@@ -16,11 +16,7 @@ var util = new Util.CommonUtil();
 
 /* ========================================== */
 
-/**
- * { var_description }
- *
- * @type       {<type>}
- */
+// 测试
 var testRun = {
     getByFieldTest: function() {
         var fieldOnj = { name: 'username', value: '花田错' }
@@ -73,6 +69,6 @@ var testRun = {
 }
 // testRun.updatesByFieldsTest()
 // testRun.getUUID()
-testRun.getByFieldTest()
+// testRun.getByFieldTest()
 // testRun.saveNewUserTest()
 // testRun.getUserListTest()

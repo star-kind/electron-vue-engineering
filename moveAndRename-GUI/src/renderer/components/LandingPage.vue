@@ -20,13 +20,13 @@
                     <br><br>
                 </div>
                 <!--  -->
-                <el-button type="primary">注册</el-button>
+                <el-button type="primary" round>注册</el-button>
                 <!--  -->
                 <div class="doc">
                     <div class="title alt">Other Documentation</div>
                     <button class="alt" @click="jump2('biliMedia')">哔哩哔哩缓存视频文件批量更名及移动</button>
                     <!--  -->
-                    <button class="alt" @click="jump2('')">未定</button>
+                    <button class="alt" @click="jump2('UserList')">查看全体用户</button>
                 </div>
             </div>
         </main>
@@ -57,7 +57,7 @@ export default {
     }
 }
 </script>
-<style>
+<style scoped="LandingPage.vue">
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 
 * {
@@ -140,5 +140,9 @@ main>div {
 .doc button.alt {
     color: #42b983;
     background-color: transparent;
+}
+
+button {
+    margin: 0 19px;
 }
 </style>

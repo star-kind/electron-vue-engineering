@@ -1,79 +1,53 @@
-var Conn = require('./../base/dbConn.js');
-
 // sqlites数据库地址
-var file = "./../../../database/moveAndRename.db";
+// var file = "./../../../database/moveAndRename.db";
+var file = __dirname + '/database/moveAndRename.db';
 
-// links the database
-var links = new Conn.databaseCon(file);
+var DatabaseCon = require('./../base/dbConn2.js');
 
-var User = require('./../entity/User.js')
+// Connect the database
+var connect = new DatabaseCon(file);
 
-/**
- * { 运行测试 }
- */
-var runTest = function() {
-    var dao = new userDao1();
-    console.log(dao.SUCCESS);
+var User = require('./../entity/User.js');
 
-    dao.linkDataBase();
-    dao.getUserList();
-    // console.log(dao.promiseObj);
-    dao.promiseObj.then(val => {
-        console.log('Status switches to fulfilled');
-        console.log(JSON.stringify(val))
-    }, val => {
-        console.info('Status switches to reject');
-        console.info(JSON.stringify(val))
-    })
-}
-// runTest()
-
-var addOneUserTest = function() {
-    // var props = { username: '韦迪马尔斯马拉', phone: '184472191', email: 'Ularry@qq.com', password: "anfdghgfd15951fa", salt: '01dvbsdf4d51db4' };
-    var props1 = { username: 'UCRU', phone: '1651894611' };
-    var dao = new userDao1();
-    var userData = new User(props1);
-
-    dao.addOneUser(userData);
-}
-// addOneUserTest()
-
-var getOneUserTest = function() {
-    var dao = new userDao1();
-    var promise = dao.getOneUser(8);
-
-    promise.then(val => {
-        console.log('fully success')
-        console.dir(val)
-    }, val => {
-        console.log('defeat')
-    })
-}
-// getOneUserTest()
-
-var updatesByIdTest = function() {
-    var dao = new userDao1();
-    var props = { username: '天城大将甘玉义', id: 3 };
-    var user = new User(props)
-
-    dao.updatesById(user);
-}
-// updatesByIdTest()
-
-/* ======================以上为测试========================= */
 
 /**
  * { 自定义构造函数 }
  */
-function userDao1() {
+function userDAO2() {
     this.SUCCESS = 200;
 
     /**
-     * Links a data base.
+     * Creates an user table.
+     */
+    this.createUserTable = function() {
+        // 建表语句
+        var sentence = 'CREATE TABLE IF NOT EXISTS ';
+        sentence += 't_user'; //表名
+        sentence += '(';
+        sentence += 'id INTEGER PRIMARY KEY,';
+        sentence += 'username VARCHAR(50) NOT NULL UNIQUE,';
+        sentence += 'phone VARCHAR(50) NOT NULL UNIQUE,';
+        sentence += 'email VARCHAR(80) NOT NULL UNIQUE,';
+        sentence += 'password CHAR(100) NOT NULL,';
+        sentence += 'salt CHAR(100) NOT NULL';
+        sentence += ');';
+
+        try {
+            connect.createTable(sentence)
+        } catch (error) {
+            console.info(error);
+            throw error;
+        } finally {
+            connect.closeConnect();
+        }
+    };
+
+    /**
+     * Conn a data base.
      */
     this.linkDataBase = function() {
-        console.dir(links)
-        console.info(links.toString())
+        console.dir(connect)
+        console.info(connect.toString())
     };
 
     /**
@@ -100,12 +74,12 @@ function userDao1() {
         props.value = params;
 
         try {
-            links.insertPlus(props);
+            connect.insertPlus(props);
         } catch (error) {
             console.error(error)
             throw error;
         } finally {
-            links.closeConnect();
+            connect.closeConnect();
         }
     };
 
@@ -134,8 +108,8 @@ function userDao1() {
         sql += "'"
         sql += " ;";
 
-        this.promiseObj = links.findByFieldValue(sql);
-        links.closeConnect();
+        this.promiseObj = connect.findByFieldValue(sql);
+        connect.closeConnect();
         return this.promiseObj;
     };
 
@@ -150,7 +124,7 @@ function userDao1() {
         querySql += "FROM t_user";
         querySql += ";";
 
-        this.promiseObj = links.findAll(querySql).then(value => {
+        this.promiseObj = connect.findAll(querySql).then(value => {
             console.log('成功态,接受resolved的结果...')
             console.dir(JSON.stringify(value));
             return value;
@@ -158,7 +132,7 @@ function userDao1() {
             console.log('失败态,接受rejected的结果:')
             console.dir(JSON.stringify(value));
         })
-        links.closeConnect();
+        connect.closeConnect();
         return this.promiseObj;
     };
 
@@ -205,12 +179,12 @@ function userDao1() {
         sqlSentence += " );";
 
         try {
-            links.insert(sqlSentence);
+            connect.insert(sqlSentence);
         } catch (err) {
             console.dir(err)
             throw err;
         } finally {
-            links.closeConnect();
+            connect.closeConnect();
         }
     };
 
@@ -230,8 +204,8 @@ function userDao1() {
         querySql += "'";
         querySql += ";";
 
-        this.promiseObj = links.findById(querySql);
-        links.closeConnect();
+        this.promiseObj = connect.findById(querySql);
+        connect.closeConnect();
 
         return this.promiseObj;
     };
@@ -307,12 +281,12 @@ function userDao1() {
         sqlSentence += " ;";
 
         try {
-            links.executeCommand(sqlSentence);
+            connect.executeCommand(sqlSentence);
         } catch (error) {
             console.error(error)
             throw error;
         } finally {
-            links.closeConnect();
+            connect.closeConnect();
         }
     };
 
@@ -364,15 +338,15 @@ function userDao1() {
         sql += ' ;';
 
         try {
-            links.executeCommand(sql);
+            connect.executeCommand(sql);
         } catch (error) {
             console.error(error)
             throw error;
         } finally {
-            links.closeConnect();
+            connect.closeConnect();
         }
     };
 }
 
 // 导出模块
-module.exports.userDao1 = userDao1;
+module.exports = userDAO2;

@@ -1,72 +1,44 @@
-var Conn = require('./../base/dbConn.js');
+var User2 = require('./../entity/User2.js');
+
+var Conn = require('./../base/dbConn3.js');
 
 // sqlites数据库地址
-var file = "./../../../database/moveAndRename.db";
+var file = __dirname + '/database/moveAndRename.db';
 
 // links the database
-var links = new Conn.databaseCon(file);
-
-var User = require('./../entity/User.js')
-
-/**
- * { 运行测试 }
- */
-var runTest = function() {
-    var dao = new userDao1();
-    console.log(dao.SUCCESS);
-
-    dao.linkDataBase();
-    dao.getUserList();
-    // console.log(dao.promiseObj);
-    dao.promiseObj.then(val => {
-        console.log('Status switches to fulfilled');
-        console.log(JSON.stringify(val))
-    }, val => {
-        console.info('Status switches to reject');
-        console.info(JSON.stringify(val))
-    })
-}
-// runTest()
-
-var addOneUserTest = function() {
-    // var props = { username: '韦迪马尔斯马拉', phone: '184472191', email: 'Ularry@qq.com', password: "anfdghgfd15951fa", salt: '01dvbsdf4d51db4' };
-    var props1 = { username: 'UCRU', phone: '1651894611' };
-    var dao = new userDao1();
-    var userData = new User(props1);
-
-    dao.addOneUser(userData);
-}
-// addOneUserTest()
-
-var getOneUserTest = function() {
-    var dao = new userDao1();
-    var promise = dao.getOneUser(8);
-
-    promise.then(val => {
-        console.log('fully success')
-        console.dir(val)
-    }, val => {
-        console.log('defeat')
-    })
-}
-// getOneUserTest()
-
-var updatesByIdTest = function() {
-    var dao = new userDao1();
-    var props = { username: '天城大将甘玉义', id: 3 };
-    var user = new User(props)
-
-    dao.updatesById(user);
-}
-// updatesByIdTest()
-
-/* ======================以上为测试========================= */
+var links = Conn.databaseCon(file);
 
 /**
  * { 自定义构造函数 }
  */
-function userDao1() {
+function userDAO3() {
     this.SUCCESS = 200;
+
+    /**
+     * Creates an user table.
+     */
+    this.createUserTable = function() {
+        // 建表语句
+        var sentence = 'CREATE TABLE IF NOT EXISTS ';
+        sentence += 't_user'; //表名
+        sentence += '(';
+        sentence += 'id INTEGER PRIMARY KEY,';
+        sentence += 'username VARCHAR(50) NOT NULL UNIQUE,';
+        sentence += 'phone VARCHAR(50) NOT NULL UNIQUE,';
+        sentence += 'email VARCHAR(80) NOT NULL UNIQUE,';
+        sentence += 'password CHAR(100) NOT NULL,';
+        sentence += 'salt CHAR(100) NOT NULL';
+        sentence += ');';
+
+        try {
+            links.createTable(sentence)
+        } catch (error) {
+            console.info(error);
+            throw error;
+        } finally {
+            links.closeConnect();
+        }
+    };
 
     /**
      * Links a data base.
@@ -375,4 +347,9 @@ function userDao1() {
 }
 
 // 导出模块
-module.exports.userDao1 = userDao1;
+// module.exports.userDAO3 = userDAO3;
+
+//导出模块给vue
+export {
+    userDAO3
+}

@@ -38,5 +38,11 @@ export default new Router({
             component: resolve => require(['@/views/biliMedia.vue'], resolve),
             alias: 'bilibiliMedia'
         },
+        {
+            path: '/UserList',
+            name: 'UserList',
+            component: resolve => require(['@/views/UserList.vue'], resolve),
+            alias: 'userList'
+        },
     ]
 })

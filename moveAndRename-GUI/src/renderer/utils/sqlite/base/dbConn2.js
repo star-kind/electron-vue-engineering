@@ -21,6 +21,25 @@ function databaseCon(fileUrl) {
 }
 
 /**
+ * Creates a table.
+ *
+ * @param      {<type>}  sql     The sql
+ */
+databaseCon.prototype.createTable = function(sql) {
+    var mineDB = this.db;
+    console.info(sql)
+    this.db.serialize(function() {
+        mineDB.run(sql, function(err) {
+            if (null != err) {
+                console.error(err);
+                return;
+            }
+            console.info('建表成功!')
+        });
+    });
+}
+
+/**
  * Returns a string representation of the object.
  *
  * @return     {string}  String representation of the object.
