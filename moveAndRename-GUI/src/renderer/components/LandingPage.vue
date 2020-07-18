@@ -20,7 +20,7 @@
                     <br><br>
                 </div>
                 <!--  -->
-                <el-button type="primary" round>注册</el-button>
+                <el-button type="primary" @click="jump2('Register')" round>注册</el-button>
                 <!--  -->
                 <div class="doc">
                     <div class="title alt">Other Documentation</div>
@@ -40,7 +40,7 @@ export default {
     components: { SystemInformation },
     data() {
         return {
-            topTitle: " The Element-Vue Project"
+            topTitle: " The Element-Vue Project "
         }
     },
     methods: {

@@ -44,5 +44,11 @@ export default new Router({
             component: resolve => require(['@/views/UserList.vue'], resolve),
             alias: 'userList'
         },
+        {
+            path: '/Register',
+            name: 'Register',
+            component: resolve => require(['@/views/Register.vue'], resolve),
+            alias: 'register'
+        },
     ]
 })

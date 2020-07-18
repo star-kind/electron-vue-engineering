@@ -4,7 +4,7 @@ var fs = require('fs');
 var sqlite3 = require('sqlite3').verbose();
 
 /**
- * { function_description }
+ * { constructor }
  *
  * @param      {<type>}  fileUrl  The file url
  */
@@ -37,7 +37,7 @@ databaseCon.prototype.createTable = function(sql) {
             console.info('建表成功!')
         });
     });
-}
+};
 
 /**
  * Returns a string representation of the object.
@@ -53,7 +53,7 @@ databaseCon.prototype.toString = function() {
     statStr += this.exist
     statStr += ']';
     return statStr;
-}
+};
 
 /**
  * Finds all.有效,可以返回数据
@@ -82,7 +82,7 @@ databaseCon.prototype.findAll = function(sqlStatement) {
     })
 
     return queryAll;
-}
+};
 
 /**
  * { 增加1位:未使用占位符'?' }
@@ -98,7 +98,7 @@ databaseCon.prototype.insert = function(sql_statement) {
         stmt.run();
         stmt.finalize();
     });
-}
+};
 
 /**
  * Finds a by field value.
@@ -122,7 +122,7 @@ databaseCon.prototype.findByFieldValue = function(sql) {
     }, val => {
         console.log('rejected=失败态')
     })
-}
+};
 
 /**
  * { insert }
@@ -171,10 +171,6 @@ databaseCon.prototype.findById = function(sql) {
 databaseCon.prototype.executeCommand = function(sql_statement) {
     console.log(sql_statement);
     this.db.run(sql_statement, function(err) {
-        // if (null != err) {
-        //     console.error(err);
-        //     return err;
-        // }
         if (err) throw err;
         console.info('\n执行完毕!\n');
     });
@@ -186,7 +182,6 @@ databaseCon.prototype.executeCommand = function(sql_statement) {
 databaseCon.prototype.closeConnect = function() {
     this.db.close();
 };
-
 
 /**
  * Queries all.只能查询却无法返回数据
@@ -211,6 +206,10 @@ databaseCon.prototype.queryAll = function(sql_statement, callback) {
             }
         });
     });
+};
+
+export {
+    databaseCon
 }
 
 // module.exports = {
@@ -218,7 +217,3 @@ databaseCon.prototype.queryAll = function(sql_statement, callback) {
 // }
 // module.exports.databaseCon = databaseCon;
 // module.exports = databaseCon;
-
-export {
-    databaseCon
-}

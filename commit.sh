@@ -8,7 +8,7 @@ git status
 
 git add .  
 
-git commit -m "user模块:开始user业务层级与view组件的数据交互对接"
+git commit -m "user模块:用户注册前后业务基本完成,但仍需些许微调"
 
 # 提示：更新被拒绝，因为您当前分支的最新提交落后于其对应的远程分支。
 # 提示：再次推送前，先与远程变更合并（如 'git pull ...'）。详见

@@ -1,3 +1,6 @@
+const crypto = require('crypto');
+const hash = crypto.createHash('md5');
+
 var Util = require('./../util/commonUtil.js');
 
 var UserDAO1 = require('./../dao/UserDAO1')
