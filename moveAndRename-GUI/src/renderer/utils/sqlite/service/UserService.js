@@ -37,19 +37,23 @@ function UserService() {
         register(params) {
             var params2 = {};
 
-            params2.username = params.username;
-            params2.salt = util.getUUID();
-            params2.email = params.email;
-            params2.phone = params.phone;
+            var uuid = util.getUUID();
 
-            hash.update(params2.salt + params.password + params2.salt);
+            /*此处赋值要对应SQL语句中的字段顺序,不然会段与值之间发生错位*/
+            params2.username = params.username;
+            params2.phone = params.phone;
+            params2.email = params.email;
+
+            hash.update(uuid + params.password + uuid);
             params2.password = hash.digest('hex');
+
+            params2.salt = uuid;
 
             try {
                 userdao.saveNewUser(params2);
             } catch (error) {
                 console.error(error);
-                return new response.response(error.errno, err.code, 0);;
+                return new response.response(error.errno, err.code, 0);
             } finally {
                 console.log('whatever,register"s work is done.')
             }

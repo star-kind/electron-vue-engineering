@@ -56,6 +56,7 @@ UserDAO3.prototype.linkDataBase = function() {
  * @return     {<type>}  { description_of_the_return_value }
  */
 UserDAO3.prototype.saveNewUser = function(params) {
+    console.dir(params)
     var props = {}
 
     for (let i in params) {

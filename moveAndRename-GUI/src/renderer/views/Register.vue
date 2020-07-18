@@ -138,7 +138,7 @@ export default {
             var serv = userService.constructor.prototype;
 
             let flag = true;
-            // var mine = this;
+            var mine = this;
             // var account = mine.ruleForm;
 
             this.$refs[refItemName].validate(valid => {
@@ -164,9 +164,11 @@ export default {
                     duration: 3000
                 });
 
-                // this.$router.push("landing-page");
+                setTimeout(function(argument) {
+                    mine.$router.push("landing-page");
+                }, 1000 * 6);
             } else {
-                mine.$alert(res.msg, "错误", {
+                this.$alert(res.msg, "错误", {
                     confirmButtonText: "确定"
                 });
             }

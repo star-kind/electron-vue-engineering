@@ -57,8 +57,16 @@ var userDaoTest = {
         var result = hash.digest('hex');
         console.log(result === databaseKwd);
     },
+
+    delayTest() {
+        var f = function() {
+            console.info('The DJ god,rap king,dance superman');
+        };
+        setTimeout(f, 5000);
+    },
 }
-userDaoTest.verifyPasswordTest()
+userDaoTest.delayTest()
+// userDaoTest.verifyPasswordTest()
 // userDaoTest.getSecretTextTest()
 // userDaoTest.createUserTableTest()
 // userDaoTest.saveNewUserTest()
