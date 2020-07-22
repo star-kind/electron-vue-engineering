@@ -77,10 +77,12 @@ databaseCon.prototype.findAll = function(sqlStatement) {
     });
     queryAll.then(function(value) { // success
         // console.info(value)
-        return value
+        return value;
     }, function(value) { // failure
-    })
-
+        console.log('rejected==已失败');
+    }).catch(err => {
+        reject(err);
+    });
     return queryAll;
 };
 
@@ -121,6 +123,8 @@ databaseCon.prototype.findByFieldValue = function(sql) {
         return val;
     }, val => {
         console.log('rejected=失败态')
+    }).catch(err => {
+        reject(err);
     })
 };
 
@@ -165,6 +169,8 @@ databaseCon.prototype.findById = function(sql) {
         return val;
     }, val => {
         console.log('失败:')
+    }).catch(err => {
+        reject(err);
     });
 };
 

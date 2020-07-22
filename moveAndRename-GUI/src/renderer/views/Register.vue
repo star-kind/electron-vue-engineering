@@ -53,7 +53,7 @@
     </el-container>
 </template>
 <script type="text/javascript">
-import { UserService } from '@/utils/sqlite/service/UserService';
+import { UserService2 } from '@/utils/sqlite/service/UserService2';
 
 export default {
     name: "Register",
@@ -93,8 +93,8 @@ export default {
                 rePassword: "",
                 username: "",
                 password: "",
-                email: "",
-                phone: "13774357479"
+                email: "@qq.com",
+                phone: "13994377479"
             },
             rules: {
                 password: [{
@@ -134,7 +134,7 @@ export default {
     },
     methods: {
         submitForm(refItemName) {
-            var userService = new UserService();
+            var userService = new UserService2();
             var serv = userService.constructor.prototype;
 
             let flag = true;
@@ -164,7 +164,7 @@ export default {
                     duration: 3000
                 });
 
-                setTimeout(function(argument) {
+                setTimeout(function() {
                     mine.$router.push("landing-page");
                 }, 1000 * 6);
             } else {

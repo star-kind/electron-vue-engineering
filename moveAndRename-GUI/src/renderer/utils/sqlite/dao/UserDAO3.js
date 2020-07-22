@@ -109,7 +109,7 @@ UserDAO3.prototype.getByField = function(field) {
     sql += " ;";
 
     this.promiseObj = links.findByFieldValue(sql);
-    links.closeConnect();
+    // links.closeConnect();
     return this.promiseObj;
 };
 
@@ -132,7 +132,7 @@ UserDAO3.prototype.getUserList = function() {
         console.log('失败态,接受rejected的结果:')
         console.dir(JSON.stringify(value));
     })
-    links.closeConnect();
+    // links.closeConnect();
     return this.promiseObj;
 };
 
@@ -155,7 +155,7 @@ UserDAO3.prototype.getUserList2 = function() {
         console.log('失败态,接受rejected的结果:')
         // console.dir(JSON.stringify(value));
     })
-    links.closeConnect();
+    // links.closeConnect();
     return this.promiseObj;
 };
 
@@ -228,7 +228,7 @@ UserDAO3.prototype.getOneUser = function(id) {
     querySql += ";";
 
     this.promiseObj = links.findById(querySql);
-    links.closeConnect();
+    // links.closeConnect();
 
     return this.promiseObj;
 };

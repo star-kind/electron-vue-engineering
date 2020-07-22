@@ -64,8 +64,21 @@ var userDaoTest = {
         };
         setTimeout(f, 5000);
     },
+
+    verifyPasswordTest2() {
+        // var uuid = util.getUUID();
+        var password = '123';
+        var uuid2 = '14c8a2b08e6a48b19475adfddd635191';
+
+        // hash.update(uuid + password + uuid);
+        hash.update(uuid2 + password + uuid2);
+        var text = hash.digest('hex');
+
+        console.log(text);
+    },
 }
-userDaoTest.delayTest()
+userDaoTest.verifyPasswordTest2()
+// userDaoTest.delayTest()
 // userDaoTest.verifyPasswordTest()
 // userDaoTest.getSecretTextTest()
 // userDaoTest.createUserTableTest()

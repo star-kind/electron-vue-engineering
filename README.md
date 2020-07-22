@@ -51,3 +51,9 @@
 + 密码加密应用了MD5+UUID
 
 + this在callback(回调)函数中会失效,无法调用
+
++ 调用` this.$store.dispatch ` 总是报错没有then方法` TypeError: Cannot read property 'then' of undefined `,通过vuex调用store模块宣告失败
+
++ 全体用户列表组件经常报错,报错时尝试重新加载即可
+
++ 每当代码有所改动之时,皆需重新加载

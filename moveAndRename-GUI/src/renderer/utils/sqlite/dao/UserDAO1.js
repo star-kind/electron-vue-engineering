@@ -60,7 +60,6 @@ var updatesByIdTest = function() {
 }
 // updatesByIdTest()
 
-/* ======================以上为测试========================= */
 
 /**
  * { 自定义构造函数 }

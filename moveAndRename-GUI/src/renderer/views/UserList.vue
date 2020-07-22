@@ -45,7 +45,7 @@
 <script>
 import { getParaStr, getTheStr } from '@/utils/sqlite/test/intoVueTest';
 
-import { UserService } from '@/utils/sqlite/service/UserService';
+import { UserService2 } from '@/utils/sqlite/service/UserService2';
 import { intoVueTest } from '@/utils/sqlite/test/intoVueTest';
 
 export default {
@@ -98,7 +98,9 @@ export default {
             this.tblHtmlText = htm;
         },
         getUserList() {
-            var userService = new UserService();
+            var userService = new UserService2();
+            console.info('userService=== ');
+            console.dir(userService);
             userService = userService.constructor.prototype;
             console.dir(userService);
             var usersData = userService.findAllUser();

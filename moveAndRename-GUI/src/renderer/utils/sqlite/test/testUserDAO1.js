@@ -17,9 +17,11 @@ var dao = new UserDAO1.userDao1();
 // 创建对象
 var util = new Util.CommonUtil();
 
-/* ========================================== */
-
-// 测试
+/**
+ * 测试
+ *
+ * @type       {<type>}
+ */
 var testRun = {
     getByFieldTest: function() {
         var fieldOnj = { name: 'username', value: '花田错' }
