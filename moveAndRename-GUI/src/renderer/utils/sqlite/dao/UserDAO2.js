@@ -346,6 +346,34 @@ function userDAO2() {
             connect.closeConnect();
         }
     };
+
+    /**
+     * 根据一个或多个id删除一或多行
+     *
+     * @param      {<type>}  props   The properties
+     * @return     {<type>}  { description_of_the_return_value }
+     */
+    this.deleteByIds = function(props) {
+        console.dir(props);
+        var sql = "DELETE FROM t_user WHERE ";
+        sql += props.column
+        sql += " IN "
+        sql += " ( "
+        sql += props.value.join(", ");
+        sql += " ) "
+        sql += " ;";
+        console.log(sql);
+
+        try {
+            connect.deletes(sql);
+        } catch (err) {
+            console.error(err);
+            return err;
+        } finally {
+            connect.closeConnect();
+        }
+        return props.value.length;
+    };
 }
 
 // 导出模块

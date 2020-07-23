@@ -214,6 +214,17 @@ databaseCon.prototype.queryAll = function(sql_statement, callback) {
     });
 };
 
+/**
+ * { deletes }
+ *
+ * @param      {<type>}  sql_statement  The sql statement
+ */
+databaseCon.prototype.deletes = function(sql_statement) {
+    console.log(sql_statement);
+    let sql_del = this.db.prepare(sql_statement);
+    sql_del.run();
+};
+
 export {
     databaseCon
 }

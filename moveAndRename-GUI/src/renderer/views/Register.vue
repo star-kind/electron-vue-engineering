@@ -58,6 +58,16 @@ import { UserService2 } from '@/utils/sqlite/service/UserService2';
 export default {
     name: "Register",
     data() {
+        const validateUsername = (rule, value, callback) => {
+            //中文、英文、数字但不包括下划线等符号
+            let nameExp = /^[\u4E00-\u9FA5A-Za-z0-9]+$/;
+            let regExpObj = new RegExp(nameExp);
+            if (regExpObj.test(value) == false) {
+                callback(new Error("输入的名字不符合规范,正确的规范为:中文、英文、数字但不包括下划线等符号."));
+            } else {
+                callback()
+            }
+        };
         const validateEmail = (rule, value, callback) => {
             var mailExp = /\w+([-+.']\w+)*@\w+([-.]w+)*\.\w+([-.]\w+)*/;
             let exp = new RegExp(mailExp);
@@ -103,7 +113,12 @@ export default {
                         trigger: "blur",
                         validator: validateRePassword
                     },
-                    { min: 3, max: 16, message: "长度在 3 到 16 个字符", trigger: "blur" }
+                    {
+                        min: 3,
+                        max: 16,
+                        message: "长度在 3 到 16 个字符",
+                        trigger: "blur"
+                    }
                 ],
                 rePassword: [{
                         required: true,
@@ -111,7 +126,12 @@ export default {
                         trigger: "blur",
                         validator: validateRePassword
                     },
-                    { min: 3, max: 16, message: "长度在 3 到 16 个字符", trigger: "blur" }
+                    {
+                        min: 3,
+                        max: 16,
+                        message: "长度在 3 到 16 个字符",
+                        trigger: "blur"
+                    }
                 ],
                 phone: [{
                     required: true,
@@ -125,9 +145,18 @@ export default {
                     trigger: "blur",
                     validator: validateEmail
                 }],
-                username: [
-                    { required: true, message: "请输入名字", trigger: "blur" },
-                    { min: 3, max: 30, message: "长度在 3 到 30 个字符", trigger: "blur" }
+                username: [{
+                        required: true,
+                        message: "请输入名字",
+                        trigger: "blur",
+                        validator: validateUsername
+                    },
+                    {
+                        min: 3,
+                        max: 30,
+                        message: "长度在 3 到 30 个字符",
+                        trigger: "blur"
+                    },
                 ]
             }
         };

@@ -50,6 +50,34 @@ UserDAO3.prototype.linkDataBase = function() {
 };
 
 /**
+ * 根据一个或多个id删除一或多行
+ *
+ * @param      {<type>}  props   The properties
+ * @return     {<type>}  { description_of_the_return_value }
+ */
+UserDAO3.prototype.deleteByIds = function(props) {
+    console.dir(props);
+    var sql = "DELETE FROM t_user WHERE ";
+    sql += props.column
+    sql += " IN "
+    sql += " ( "
+    sql += props.value.join(", ");
+    sql += " ) "
+    sql += " ;";
+    console.log(sql);
+
+    try {
+        links.deletes(sql);
+    } catch (err) {
+        console.error(err);
+        return err;
+    } finally {
+        links.closeConnect();
+    }
+    return props.value.length;
+}
+
+/**
  * Saves a new user.
  *
  * @param      {<type>}  params  The parameters

@@ -136,7 +136,7 @@ export default {
                         duration: 3000
                     });
                     setTimeout(function() {
-                        mine.$router.push({ path: '/' })
+                        mine.$router.push({ path: '/Privately' });
                     }, 6 * 1000);
                 } else {
                     this.$alert(res.msg, {

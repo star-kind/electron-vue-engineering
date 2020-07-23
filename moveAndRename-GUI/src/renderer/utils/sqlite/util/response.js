@@ -1,5 +1,5 @@
 function response(code, msg, data) {
-    this.code = code || null;
+    this.code = code || 200;
     this.msg = msg || '';
     this.data = data || null;
 }

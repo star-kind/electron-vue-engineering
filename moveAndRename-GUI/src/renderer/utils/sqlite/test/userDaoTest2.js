@@ -5,15 +5,26 @@ var Util = require('./../util/commonUtil.js');
 
 var UserDAO2 = require('./../dao/UserDAO2');
 
+var UserDAO3 = require('./../dao/UserDAO3');
+
 var User = require('./../entity/User.js');
 
 var dao = new UserDAO2();
+
+var dao3 = new UserDAO3.UserDAO3();
 
 // 创建对象
 var util = new Util.CommonUtil();
 
 // 测试DAO
 var userDaoTest = {
+    deleteByIdsTest() {
+        var ids = [8, 9, 10]
+        var props = { column: 'id', value: ids };
+        var affects = dao3.deleteByIds(props);
+        console.log('affects= ' + affects);
+    },
+
     getUserListTest() {
         var list = dao.getUserList();
         list.then(v => {
@@ -77,7 +88,8 @@ var userDaoTest = {
         console.log(text);
     },
 }
-userDaoTest.verifyPasswordTest2()
+userDaoTest.deleteByIdsTest();
+// userDaoTest.verifyPasswordTest2()
 // userDaoTest.delayTest()
 // userDaoTest.verifyPasswordTest()
 // userDaoTest.getSecretTextTest()

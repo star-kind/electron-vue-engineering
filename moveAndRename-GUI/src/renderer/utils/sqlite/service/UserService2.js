@@ -31,7 +31,25 @@ UserService2.prototype.findAllUser = function() {
 }
 
 /**
- * { function_description }
+ * 改资料
+ *
+ * @param      {<type>}    user    The user
+ * @return     {response}  { description_of_the_return_value }
+ */
+UserService2.prototype.updateUserData = (user) => {
+    try {
+        userdao.updatesById(user);
+    } catch (err) {
+        console.error(err);
+        throw err;
+    }
+    var data = userdao.getByField({ name: 'id', value: user.id });
+    console.dir(data);
+    return new response.response(200, '', data);
+}
+
+/**
+ * { 注册 }
  *
  * @param      {<type>}    params  The parameters
  * @return     {response}  { description_of_the_return_value }

@@ -13,7 +13,7 @@ class User2 {
     }
 }
 
-// module.exports = User;
+// module.exports = User2;
 
 export {
     User2
