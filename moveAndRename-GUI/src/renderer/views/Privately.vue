@@ -5,7 +5,7 @@
                 主页
             </router-link>
             <!--  -->
-            <router-link to="/" class="back_home" id="change_password_link">
+            <router-link to="/AlterPassword" class="back_home" id="change_password_link">
                 修改密码
             </router-link>
         </el-header>
@@ -206,7 +206,7 @@ export default {
                         console.error(err);
                     })
             } else {
-                this.$alert('修改未成功,请通知技术人员处理', {
+                this.$alert(res.msg, {
                     type: 'warning',
                     confirmButtonText: 'OK'
                 })

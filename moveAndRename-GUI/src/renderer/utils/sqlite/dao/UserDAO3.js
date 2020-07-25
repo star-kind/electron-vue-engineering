@@ -269,9 +269,9 @@ UserDAO3.prototype.getOneUser = function(id) {
  */
 UserDAO3.prototype.updatesById = function(user) {
     if (user == null || '' || undefined) {
-        this.errorMsg = '参数为空!';
+        this.errorMsg = '参数不齐全!';
         console.error(this.errorMsg)
-        return this.errorMsg;
+        throw this.errorMsg;
     }
     var sqlSentence = "UPDATE t_user SET ";
 
@@ -325,7 +325,7 @@ UserDAO3.prototype.updatesById = function(user) {
     if (user.id == null || '' || undefined) {
         this.errorMsg = '参数[id]为空!';
         console.error(this.errorMsg)
-        return this.errorMsg;
+        throw this.errorMsg;
     }
     sqlSentence += " WHERE id = ";
     sqlSentence += user.id;

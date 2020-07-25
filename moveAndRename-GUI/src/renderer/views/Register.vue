@@ -147,7 +147,7 @@ export default {
                 }],
                 username: [{
                         required: true,
-                        message: "请输入名字",
+                        message: "请输入正确的名字",
                         trigger: "blur",
                         validator: validateUsername
                     },

@@ -41,7 +41,7 @@ UserService2.prototype.updateUserData = (user) => {
         userdao.updatesById(user);
     } catch (err) {
         console.error(err);
-        throw err;
+        return new response.response(505, err, '');
     }
     var data = userdao.getByField({ name: 'id', value: user.id });
     console.dir(data);
@@ -80,6 +80,50 @@ UserService2.prototype.register = function(params) {
     }
 
     return new response.response(200, 'OK', 1);
+}
+
+/**
+ * 更改密码
+ *
+ * @param      {<type>}    oldPassWord  The old pass word
+ * @param      {<type>}    newPassWord  The new pass word
+ * @param      {<type>}    id           The identifier
+ * @return     {Function}  { description_of_the_return_value }
+ */
+UserService2.prototype.alterPassWordService = (oldPassWord, newPassWord, id) => {
+    var respObj = userdao.getByField({ name: 'id', value: id }).then(result => {
+        console.dir(result);
+        var r = result[0];
+
+        /*校验原密码之对错*/
+        hash.update(r.salt + oldPassWord + r.salt)
+        var oldText = hash.digest('hex');
+        console.log('oldText= ' + oldText);
+        if (oldText !== r.password) {
+            return new response.response(441, '旧密码错误!', null)
+        }
+
+        /* 如若旧密码正确则开始更改 */
+        var hash2 = crypto.createHash('md5');
+        hash2.update(r.salt + newPassWord + r.salt);
+        var newText = hash2.digest('hex');
+        console.log('newText= ' + newText);
+
+        var targets = [{ name: 'password', value: newText }];
+        var condition = { name: 'id', value: id };
+
+        try {
+            userdao.updatesByFields(targets, condition);
+        } catch (err) {
+            console.error(err)
+        }
+        return new response.response(200, '密码修改成功', null);
+    }).catch(err => {
+        console.log(err);
+        throw err;
+    })
+    console.log('END_ING...');
+    return respObj;
 }
 
 /**

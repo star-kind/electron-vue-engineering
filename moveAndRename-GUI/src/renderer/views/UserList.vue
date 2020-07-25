@@ -6,7 +6,7 @@
             </router-link>
         </el-header>
         <!--  -->
-        <el-main>
+        <el-main class="own_main_div">
             <div>
                 <p>{{jsonString}}</p>
             </div>
@@ -153,5 +153,10 @@ export default {
     height: 60px;
     padding: 20px 0 0 0;
     background-color: #4f94ea;
+}
+
+.own_main_div {
+    font-family: monospace;
+    font-size: 20px;
 }
 </style>

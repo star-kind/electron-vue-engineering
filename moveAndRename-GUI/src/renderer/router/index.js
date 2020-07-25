@@ -62,5 +62,11 @@ export default new Router({
             component: resolve => require(['@/views/Privately.vue'], resolve),
             alias: 'privately'
         },
+        {
+            path: '/AlterPassword',
+            name: 'AlterPassword',
+            component: resolve => require(['@/views/AlterPassword.vue'], resolve),
+            alias: 'alterPassword'
+        },
     ]
 })
