@@ -62,3 +62,7 @@
 + 全体用户列表组件经常报错,报错时尝试重新加载即可
 
 + 每当代码有所改动之时,皆需重新加载
+
++ `electron`依赖不可安装在正式依赖(dependencies)范围,而是要安装在devDependencies之内,不然打包时会报错```
+Package electron is only allowed in devDependencies,please remove it from the dependencies section in your package.json
+```.
