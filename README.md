@@ -8,7 +8,7 @@
 	
 	亦可按照electron-vue+node.js的前后端分离流程进行开发,使用vue-cli构建,采用C/S形式发布.
 	
-	"move-rename-front" 为前端图形UI客户端,而使用express框架的node.js项目为业务后端服务器.
+	"move-rename-front" 为前端图形UI客户端,而使用express框架的node项目 node-server 为业务后端服务器.
 
 	通过本工程,加深了对js面向对象编程(OOP)的掌握程度,受益匪浅.
 
@@ -63,6 +63,9 @@
 
 + 每当代码有所改动之时,皆需重新加载
 
-+ `electron`依赖不可安装在正式依赖(dependencies)范围,而是要安装在devDependencies之内,不然打包时会报错```
++ `electron`依赖不可安装在正式依赖(dependencies)范围,而是要安装在devDependencies之内,不然打包时会报错
+
+```
 Package electron is only allowed in devDependencies,please remove it from the dependencies section in your package.json
-```.
+
+```
