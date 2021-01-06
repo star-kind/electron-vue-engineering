@@ -49,7 +49,7 @@ const blvService = function(urlList) {
     console.dir(jsonObject)
 
     var newNamesArr = getVideoNewName.getBiliVideoNewName(jsonObject);
-    console.info('\n newNamesArr:');
+    console.info('\nnewNamesArr:');
     console.dir(newNamesArr);
 
     var blvUrls = getBlvFileUrls.getBlvUrl(cacheUrl);
@@ -70,12 +70,12 @@ const blvService = function(urlList) {
             throw problem1;
         }
     } catch (error) {
-        console.error(error + '\n')
+        console.error(error)
         let problem = new exception(510, '请删除源目录,接着解压备份的压缩文件,并检查缓存的视频文件是否完好,再运行重试')
         console.dir(problem);
         throw problem;
     }
-    console.info('\nnewNamePathArr: ' + newNamePathArr + '\n');
+    console.info('\nnewNamePathArr: ' + newNamePathArr);
 
     try { // TODO 此处无法捕获并抛出异常
         for (let k in newNamePathArr, newNamesArr) {
@@ -85,7 +85,7 @@ const blvService = function(urlList) {
         flag = false;
         let except = new exception(505, '目的地目录并不存在,请创建好目的地目录后,再试一次')
         console.dir(except);
-        console.error('\n' + error + '\n')
+        console.error(error)
         throw except;
     }
 

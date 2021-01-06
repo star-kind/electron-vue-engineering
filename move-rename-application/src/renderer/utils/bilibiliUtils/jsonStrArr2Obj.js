@@ -6,12 +6,11 @@
  */
 const processJsonArray = (jsonArray) => {
     var objArr = [];
-    // console.log(jsonArray)
 
     for (let index in jsonArray) {
         objArr.push(JSON.parse(jsonArray[index]))
     }
-    console.dir('objArr: ' + objArr)
+    console.dir('\nobjArr: ' + objArr)
     return objArr;
 }
 

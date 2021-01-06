@@ -50,8 +50,8 @@ export default {
     data() {
         return {
             formData: {
-                origin: '/home/user/001/previous/pictures',
-                destination: '/home/user/001/previous/destination',
+                origin: '',
+                destination: '',
             },
             rules: {
                 origin: [{ required: true, message: '请选择源文件目录', trigger: 'blur' }],

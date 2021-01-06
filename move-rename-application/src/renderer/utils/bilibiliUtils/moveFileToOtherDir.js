@@ -15,19 +15,19 @@ const moveToDest = (srcFilePath, destPath, fileName) => {
 
     var srcFileUrl = path.join(srcFilePath);
     var destFileUrl = path.join(destPath, fileName);
-    console.info('\n destPath: ' + destPath)
-    console.info('\n destFileUrl = ' + destFileUrl)
+    console.info('\ndestPath: ' + destPath + '\n')
+    console.info('\ndestFileUrl = ' + destFileUrl + '\n')
 
     fs.rename(srcFileUrl, destFileUrl, function(err) {
         if (err) {
-            console.error('再启动运行试一次')
+            console.error('\n再启动运行试一次\n')
             throw err;
         }
 
         fs.stat(destPath, function(err, stats) {
             if (err) throw err;
-            console.log('stats: ' + JSON.stringify(stats));
-            console.info('成功移动文件至新文件夹');
+            console.log('stats: ' + JSON.stringify(stats) + '\n');
+            console.info('\n成功移动文件至新文件夹');
         });
     });
 }

@@ -9,23 +9,25 @@
                 <system-information></system-information>
             </div>
             <div class="right-side">
-                <div class="doc">
-                    <div class="title">{{topTitle}}</div>
-                    <p>
-                    </p>
-                    <button @click="jump2('RenameAndMoveFile')">JPG图片文件批量改名及迁移</button>
+                <div class="user_serv">
+                    <div class="doc">
+                        <div class="title">{{topTitle}}</div>
+                        <p>
+                        </p>
+                        <button @click="jump2('RenameAndMoveFile')">JPG图片文件批量改名及迁移</button>
+                        <!--  -->
+                        <button @click="jump2('TestCase')">信息简略</button>
+                    </div>
                     <!--  -->
-                    <button @click="jump2('TestCase')">信息简略</button>
-                    <!--  -->
-                    <br><br>
+                    <div class="reg_login">
+                        <el-button type="primary" @click="jump2('Register')" round>注册</el-button>
+                        <el-button type="primary" @click="jump2('Login')" round>登录</el-button>
+                    </div>
                 </div>
                 <!--  -->
-                <el-button type="primary" @click="jump2('Register')" round>注册</el-button>
-                <el-button type="primary" @click="jump2('Login')" round>登录</el-button>
-                <!--  -->
-                <div class="doc">
+                <div class="doc" id="move_bussiness">
                     <div class="title alt">Other Documentation</div>
-                    <button class="alt" @click="jump2('biliMedia')">哔哩哔哩缓存视频文件批量更名及移动</button>
+                    <button class="alt" @click="jump2('biliMedia')">BiliBiliAPP视频更名及移动</button>
                     <!--  -->
                     <button class="alt" @click="jump2('UserList')">查看全体用户</button>
                 </div>
@@ -96,6 +98,20 @@ main>div {
     flex-basis: 50%;
 }
 
+.user_serv>div {
+    margin: 25px 0;
+}
+
+#move_bussiness {
+    margin: 30px 0 0 0;
+}
+
+.right-side {
+    font-size: 25px;
+    left: 40%;
+    position: absolute;
+}
+
 .left-side {
     display: flex;
     flex-direction: column;
@@ -125,7 +141,7 @@ main>div {
 }
 
 .doc button {
-    font-size: .8em;
+    font-size: 0.8em;
     cursor: pointer;
     outline: none;
     padding: 0.75em 2em;

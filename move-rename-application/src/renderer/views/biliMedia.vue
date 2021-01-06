@@ -13,12 +13,12 @@
             <div class="toggle_div_">
                 <el-form :model="dirPaths" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
                     <el-form-item label="视频缓存所处目录路径" prop="srcPath" class="_input_item">
-                        <el-input placeholder="请输入视频缓存所处目录路径" prefix-icon="el-icon-search" v-model="dirPaths.srcPath">
+                        <el-input placeholder="请输入视频缓存所处目录路径" prefix-icon="el-icon-search" v-model="dirPaths.srcPath" size="medium">
                         </el-input>
                     </el-form-item>
                     <!--  -->
                     <el-form-item label="目的地目录路径" prop="targetPath" class="_input_item">
-                        <el-input placeholder="请输入目的地目录路径" prefix-icon="el-icon-search" v-model="dirPaths.targetPath">
+                        <el-input placeholder="请输入目的地目录路径" prefix-icon="el-icon-search" v-model="dirPaths.targetPath" id="own_input_ele">
                         </el-input>
                     </el-form-item>
                     <!--  -->
@@ -41,8 +41,8 @@ export default {
     data() {
         return {
             dirPaths: {
-                srcPath: '/home/user/001/previous/origin',
-                targetPath: '/home/user/001/previous/destination',
+                srcPath: '',
+                targetPath: '',
             },
             rules: {
                 srcPath: [{ required: true, message: "请输入视频缓存所处目录路径", trigger: "blur" }],
@@ -110,6 +110,7 @@ form>input {
 }
 
 #header_div_back {
+    margin: 2em 0 0 0;
     text-align: center;
     height: 60px;
     padding: 20px 0 0px 0;
@@ -119,5 +120,9 @@ form>input {
 #back_to_home {
     color: #ffffff;
     text-decoration-line: none;
+}
+
+.el-input {
+    font-size: 26px;
 }
 </style>

@@ -33,7 +33,6 @@ exports.getBlvUrl = (biliCacheUrl) => {
     }
 
     findJsonFile(biliCacheUrl);
-    // console.log(videosArr);
 
     urlArr = this.getMatchBlvUrls(videosArr)
     return urlArr;
@@ -46,19 +45,42 @@ exports.getBlvUrl = (biliCacheUrl) => {
  * @return     {Array}   The match blv urls.
  */
 exports.getMatchBlvUrls = (videoNamesArr) => {
-    var resultsArray = [];
-    var expression = '/*blv'
-    var videoType = 'blv'
+    console.log('该目录下的文件列表:\n')
+    console.log(videoNamesArr)
 
+    var resultsArray = [];
+
+    var expression = '/*blv';
+    var videoType = 'blv';
     var regExpOfPath = new RegExp(expression);
+
+    var expression2 = '/*video.m4s';
+    var videoType2 = 'video.m4s';
+    var regExpOfPath2 = new RegExp(expression2);
+
     for (let i in videoNamesArr) {
         if (regExpOfPath.test(videoNamesArr[i])) {
+            console.log('\n64line-符合条件的视频文件:');
+            console.log(videoNamesArr[i] + '\n');
+
             let videoLen = videoNamesArr[i].lastIndexOf(videoType) + videoType.length;
             if (videoLen == videoNamesArr[i].length) {
                 console.log(videoNamesArr[i]);
                 resultsArray.push(videoNamesArr[i]);
             }
+
+        } else if (regExpOfPath2.test(videoNamesArr[i])) {
+            console.log('\n71line-符合条件的视频文件:');
+            console.log(videoNamesArr[i] + '\n');
+
+            let videoLen = videoNamesArr[i].lastIndexOf(videoType2) + videoType2.length;
+            if (videoLen == videoNamesArr[i].length) {
+                console.log(videoNamesArr[i]);
+                resultsArray.push(videoNamesArr[i]);
+            }
+
         }
+
     }
     console.log(resultsArray)
     return resultsArray;
